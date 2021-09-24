@@ -1,0 +1,11 @@
+{
+  "name": "puppeteer-remote-examples",
+  "version": "1.0.0",
+  "description": "Examples using Testable as remote CDP endpoint",
+  "main": "basic.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^10.2.0"
+  }
+}
