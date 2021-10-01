@@ -24,6 +24,9 @@ const { URLSearchParams } = require('url');
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });
 
+        const info = await page.evaluate(function testable_info() {});
+        console.log(`Testable info: ${JSON.stringify(info)}`);
+
         // Indicates the start of a test step - you can see progress live on the test result page
         await page.evaluate(function testable_assertion_start() { }, {
             suite: 'Streaming suite',

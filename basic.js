@@ -11,9 +11,10 @@ const { URLSearchParams } = require('url');
             // browser name: chrome, edge, firefox, openfin 
             browserName: 'chrome',
             // browser version (e.g. latest, latest-2, 90)
-            browserVersion: 'latest-2',
+            browserVersion: 'latest',
             // size of the display (WxH)
-            screenResolution: '1920x1080'
+            screenResolution: '1920x1080',
+            logCommands: true
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
@@ -22,7 +23,7 @@ const { URLSearchParams } = require('url');
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });
 
-        await page.goto('https://websocketstest.com/');
+        await page.goto('https://google.com/');
         await page.waitForTimeout(5000);
 
         await page.screenshot({ path: 'test.png' });
