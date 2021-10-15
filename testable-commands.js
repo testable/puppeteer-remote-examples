@@ -14,12 +14,11 @@ const { URLSearchParams } = require('url');
             // browser version (e.g. latest, latest-1, 90)
             browserVersion: 'latest',
             // size of the display (WxH)
-            screenResolution: '1920x1080',
-            logCommands: true
+            screenResolution: '1920x1080'
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `ws://ec2-3-16-162-61.us-east-2.compute.amazonaws.com:8080/cdp?${params}`
+            browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });

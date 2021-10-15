@@ -40,7 +40,7 @@ async function findPage(title, browser) {
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `ws://ec2-3-16-162-61.us-east-2.compute.amazonaws.com:8080/cdp?${params}`
+            browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
         await withTimeout(async function () {
             return await page.evaluate(function () {

@@ -1,6 +1,12 @@
 const puppeteer = require('puppeteer');
 const { URLSearchParams } = require('url');
 
+function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
 (async () => {
     try {
         const params = new URLSearchParams({
@@ -53,19 +59,43 @@ const { URLSearchParams } = require('url');
             // typically running the same script against different browser versions and devices
             reportId: 'Report 123',
             // tags to associate with this test run; tags can be used to search for tests later
-            tags: 'Server-1.2.0,Env-QA'
-        }).toString();
-        const browser = await puppeteer.connect({
-            timeout: 0,
-            browserWSEndpoint: `ws://ec2-3-16-162-61.us-east-2.compute.amazonaws.com:8080/cdp?${params}`
+            tags: 'Server-1.2.0,Env-QA',
+            // How long to keep the session alive after disconnecting (e.g. 2m, 300s, 1h).
+            // If unspecified the session ends immediately after disconnecting. Make sure to not close 
+            // the browser if you plan to reconnect.
+            keepAlive: '1m'
         });
-        const page = await browser.newPage();
+        let browser = await puppeteer.connect({
+            timeout: 0,
+            browserWSEndpoint: `wss://cdp.testable.io?${params.toString()}`
+        });
+        let page = (await browser.pages())[0];
         await page.setViewport({ width: 400, height: 1000 });
 
-        await page.goto('https://iowa.rivals.com');
+        await page.goto('https://google.com');
         await page.waitForTimeout(1000);
+        await page.screenshot({ path: 'google.png' });
 
-        await page.screenshot({ path: 'test.png' });
+        // get the sessionId so we can reconnect to the same session
+        const sessionId = (await page.evaluate(function testable_info() {})).sessionId;
+        console.log(`Session ID: ${sessionId}`);
+
+        // disconnect and then reconnect using the session ID
+        browser.disconnect();
+        await sleep(1000);
+
+        params.set('sessionId', sessionId);
+        browser = await puppeteer.connect({
+            timeout: 0,
+            browserWSEndpoint: `wss://cdp.testable.io?${params.toString()}`
+        });
+
+        page = (await browser.pages())[0];
+        await page.goto('https://amazon.com');
+        await page.waitForTimeout(1000);
+        await page.screenshot({ path: 'amazon.png' });
+
+        // close the browser, will not be able to reconnect after this
         await browser.close();
     } catch (err) {
         console.log(err);
