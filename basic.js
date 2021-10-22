@@ -8,12 +8,14 @@ const { URLSearchParams } = require('url');
             key: process.env.TESTABLE_KEY,
             // Gets logged with the test indicating which user ran this test, defaults to 'remote'
             user: 'demo',
-            // browser name: chrome, edge, firefox, openfin 
+            // Browser name: chrome, edge, firefox, openfin 
             browserName: 'chrome',
-            // browser version (e.g. latest, latest-2, 90)
+            // Browser version (e.g. latest, latest-2, 90)
             browserVersion: 'latest',
-            // size of the display (WxH)
-            screenResolution: '1920x1080'
+            // Size of the display (WxH). Defaults from the device details if not specified.
+            screenResolution: '1920x1080',
+            // The region in which to run your test (use our remote configurator to see the full list of options)
+            region: 'aws-us-east-1'
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
