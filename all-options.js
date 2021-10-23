@@ -65,7 +65,10 @@ function sleep(ms) {
             // How long to keep the session alive after disconnecting (e.g. 2m, 300s, 1h).
             // If unspecified the session ends immediately after disconnecting. Make sure to not close 
             // the browser if you plan to reconnect.
-            keepAlive: '1m'
+            keepAlive: '1m',
+            // Should match the version of Puppeteer you are using. If not specified, defaults to
+            // the version which supports the chosen browser version.
+            puppeteerVersion: '10.4.0',
         });
         let browser = await puppeteer.connect({
             timeout: 0,
