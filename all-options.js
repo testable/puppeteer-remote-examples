@@ -72,7 +72,7 @@ function sleep(ms) {
         });
         let browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `wss://cdp.testable.io?${params.toString()}`
+            browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
         let page = (await browser.pages())[0];
         await page.setViewport({ width: 400, height: 1000 });
@@ -92,7 +92,7 @@ function sleep(ms) {
         params.set('sessionId', sessionId);
         browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `wss://cdp.testable.io?${params.toString()}`
+            browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
 
         page = (await browser.pages())[0];
