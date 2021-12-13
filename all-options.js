@@ -14,8 +14,6 @@ function sleep(ms) {
             key: process.env.TESTABLE_KEY,
             // Gets logged with the test indicating which user ran this test, defaults to 'remote'
             user: 'demo',
-            // Browser name: chrome, edge, firefox, openfin 
-            browserName: 'chrome',
             // Browser version (e.g. latest, latest-1, 90)
             browserVersion: 'latest-1',
             // Size of the display (WxH). Defaults from the device details if not specified.

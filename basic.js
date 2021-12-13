@@ -8,8 +8,6 @@ const { URLSearchParams } = require('url');
             key: process.env.TESTABLE_KEY,
             // Gets logged with the test indicating which user ran this test, defaults to 'remote'
             user: 'demo',
-            // Browser name: chrome, edge, firefox, openfin 
-            browserName: 'chrome',
             // Browser version (e.g. latest, latest-2, 90)
             browserVersion: 'latest',
             // Size of the display (WxH). Defaults from the device details if not specified.
@@ -21,7 +19,6 @@ const { URLSearchParams } = require('url');
             timeout: 0,
             browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
-        //const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });
 

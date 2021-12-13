@@ -36,7 +36,8 @@ async function findPage(title, browser) {
             // Gets logged with the test indicating which user ran this test, defaults to 'remote'
             user: 'demo',
             // a URL to the app config json file for your OpenFin application
-            openfinConfigUrl: 'https://raw.githubusercontent.com/testable/openfin-wdio-testable-example/master/app_sample.json'
+            openfinConfigUrl: 'https://raw.githubusercontent.com/testable/openfin-wdio-testable-example/master/app_sample.json',
+            region: 'aws-us-east-1'
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
