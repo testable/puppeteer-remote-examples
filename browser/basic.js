@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const { URLSearchParams } = require('url');
 
 (async () => {
+    let browser;
     try {
         const params = new URLSearchParams({
             // API key (Org Management => API Keys)
@@ -15,8 +16,9 @@ const { URLSearchParams } = require('url');
             // The region in which to run your test (use our remote configurator to see the full list of options)
             region: 'aws-us-east-1'
         }).toString();
-        const browser = await puppeteer.connect({
+        browser = await puppeteer.connect({
             timeout: 0,
+            defaultViewport: null,
             browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
         const page = await browser.newPage();
@@ -29,5 +31,7 @@ const { URLSearchParams } = require('url');
         await browser.close();
     } catch (err) {
         console.log(err);
+        if (browser)
+            await browser.close();
     }
 })();

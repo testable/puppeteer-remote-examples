@@ -15,7 +15,7 @@ function sleep(ms) {
             // Gets logged with the test indicating which user ran this test, defaults to 'remote'
             user: 'demo',
             // Browser version (e.g. latest, latest-1, 90)
-            browserVersion: 'latest-1',
+            browserVersion: 'latest',
             // Size of the display (WxH). Defaults from the device details if not specified.
             screenResolution: '1920x1080',
             // The region in which to run your test (use our remote configurator to see the full list of options)
@@ -90,7 +90,7 @@ function sleep(ms) {
         params.set('sessionId', sessionId);
         browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `wss://cdp.testable.io?${params}`
+            browserWSEndpoint: `wss://dev.testable.io:8088/cdp?${params}`
         });
 
         page = (await browser.pages())[0];

@@ -37,18 +37,19 @@ async function findPage(title, browser) {
             user: 'demo',
             // a URL to the app config json file for your OpenFin application
             openfinConfigUrl: 'https://raw.githubusercontent.com/testable/openfin-wdio-testable-example/master/app_sample.json',
+            // The region in which to run your test (use our remote configurator to see the full list of options)
             region: 'aws-us-east-1'
         }).toString();
         const browser = await puppeteer.connect({
             timeout: 0,
             browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
+        const page = await findPage('Hello OpenFin', browser);
         await withTimeout(async function () {
             return await page.evaluate(function () {
                 return fin && fin.desktop && fin.desktop.System && fin.desktop.System.getVersion;
             });
         });
-        const page = await findPage('Hello OpenFin', browser);
         await page.screenshot({ path: 'Main.png' });
         const notificationButton = await page.$("#desktop-notification");
         notificationButton.click();
