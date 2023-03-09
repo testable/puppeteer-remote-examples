@@ -90,7 +90,7 @@ function sleep(ms) {
         params.set('sessionId', sessionId);
         browser = await puppeteer.connect({
             timeout: 0,
-            browserWSEndpoint: `wss://dev.testable.io:8088/cdp?${params}`
+            browserWSEndpoint: `wss://cdp.testable.io?${params}`
         });
 
         page = (await browser.pages())[0];
