@@ -1,12 +1,11 @@
 {
-    "name": "puppeteer-remote-examples-openfin",
-    "version": "1.1.0",
-    "description": "Examples using Testable as remote CDP endpoint",
-    "main": "openfin.js",
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "puppeteer": "24.4.0"
-    }
+  "name": "puppeteer-remote-examples-openfin",
+  "version": "1.1.0",
+  "description": "Examples using Testable as remote CDP endpoint",
+  "main": "openfin.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^24.8.0"
   }
-  
+}
