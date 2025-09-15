@@ -6,6 +6,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^24.16.2"
+    "puppeteer": "^24.20.0"
   }
 }
